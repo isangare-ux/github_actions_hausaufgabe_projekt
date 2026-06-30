@@ -20,4 +20,4 @@ jobs:
       - name: Namensbegrussung ausführen
         env:
           STUDENT_NAME: ${{ inputs.student_name}}
-        run: bash scripts/01_manual_greeting.yml
+        run: bash scripts/01_manual_greeting.sh
