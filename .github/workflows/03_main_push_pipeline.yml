@@ -1,0 +1,20 @@
+name: 03 Main Push Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  main-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Repository herunterladen
+        uses: actions/checkout@v4
+
+      - name: Main Pipeline ausfuehren
+        run: bash scripts/04_main_pipeline.sh
+
+      - name: Einfachen Test starten
+        run: bash tests/simple_test.sh
