@@ -1,0 +1,49 @@
+name: 02 Manuelle Projektprüfung
+
+on: 
+    workflow_dispatch:
+        inputs:
+            check_type:
+                description: "Welche Prüfung soll laufen?"
+                required: true
+                default: "quick"
+                type: choice
+                options:
+                    - quick
+                    - full
+            
+            target_env:
+              description: "Welche Umgebung soll angezeit werden?"
+              required: true
+              default: "dev"
+              type: choice
+              options:
+                - dev
+                - test
+                - prod
+              
+            show_details:
+              description: "Zusätliche Details ausgeben?"
+              required: true
+              default: false
+              type: boolean
+
+jobs:
+  check:
+    runs-on: ubuntun-latest
+
+    steps:
+      - name: Repository herunterladen
+        uses: actions/checkout@v4
+
+      - name: Umgebungsinformationen anzeigen
+        env:
+          target_env: ${{inputs.target_env}}
+          show_details: ${{inputs.show_details}}
+        run: bash scripts/02_environment_info.sh
+
+      - name: Projekt pruefen
+        env:
+         check_type: ${{inputs.check_type}}
+        run: bash scripts/03_project_check.sh
+
