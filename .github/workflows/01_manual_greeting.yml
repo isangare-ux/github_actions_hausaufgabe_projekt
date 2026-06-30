@@ -1,0 +1,23 @@
+name: 01 Manuelle Begruessung
+
+on:
+  workflow_dispatch:
+    inputs:
+      student_name:
+        description: "Name für das Bash Skript"
+        required: false
+        default: "Ibrahim"
+        type: string
+
+jobs:
+  greeting:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Repository herunterladen
+        uses: actions/checkout@v4
+
+      - name: Namensbegrussung ausführen
+        env:
+          STUDENT_NAME: ${{ inputs.student_name}}
+        run: bash scripts/01_manual_greeting.yml
