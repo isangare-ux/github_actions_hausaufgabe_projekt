@@ -30,7 +30,7 @@ on:
 
 jobs:
   check:
-    runs-on: ubuntun-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Repository herunterladen
